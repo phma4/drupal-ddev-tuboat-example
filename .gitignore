@@ -41,4 +41,4 @@ sites/simpletest
 
 # Ignore multi-site test environment.
 # simpletest
-web/sites/default/files
+web/sites/default/files/*/*
