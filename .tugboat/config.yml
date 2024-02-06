@@ -24,7 +24,7 @@ services:
         # SSH key found in the Tugboat Repository configuration must be
         # copied to the external server in order to use scp.
         #- scp user@example.com:database.sql.gz /tmp/database.sql.gz
-        - zcat ${TUGBOAT_ROOT}/.tugboat/install.sql.gz | mysql tugboat
+        #- zcat ${TUGBOAT_ROOT}/.tugboat/install.sql.gz | mysql tugboat
         #- rm /tmp/database.sql.gz
 
       # Run any commands needed to prepare the site.  This is generally not needed
@@ -95,6 +95,8 @@ services:
       # and update steps, because the results of those are inherited
       # from the base preview.
       build:
+        - zcat ${TUGBOAT_ROOT}/.tugboat/install.sql.gz | vendor/bin/drush sql:cli
+
         # Install new configuration and database updates.
         - vendor/bin/drush cache:rebuild
         - vendor/bin/drush config:import --yes
